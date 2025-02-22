@@ -14,7 +14,7 @@ on:
 
 jobs:
   greet:
-    runs-on: ubuntu-latest
+    runs-on: "${{ github.event.inputs.machine }}"
 
     steps:
     - name: Send greeting
