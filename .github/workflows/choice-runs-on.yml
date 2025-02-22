@@ -1,24 +1,25 @@
+name: Choose Machine
+
 on:
   push:
     branches:
       - main
+      - release-icu4c-ubuntu.yml
   workflow_dispatch:
     inputs:
       machine:
-        description: 'Machine to run the build on.'
         type: choice
+        description: Choose Machine
         options: 
-          - 'ubuntu-24.04-arm'
-          - 'self-hosted, ubuntu-22.04, ARM64'
-        default: 'ubuntu-24.04-arm'
-        required: true       
+        - ubuntu-24.04-arm
+        - self-hosted, ubuntu-22.04, ARM64
+      environment:
+        type: environment
 
 jobs:
-  build:
-    runs-on: "${{ inputs.machine }}"
-    environment: release-env
+  greet:
+    runs-on: "${{ github.event.inputs.machine }}"
 
     steps:
-
-    - name: echo machine
-      run: echo "inputs.machine = ${{ inputs.machine }}"
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.machine }}"
