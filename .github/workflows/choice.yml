@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      machine:
+        description: 'Machine to run the build on.'
+        type: choice
+        options: 
+          - 'ubuntu-24.04-arm'
+          - 'self-hosted, ubuntu-22.04, ARM64'
+        default: 'ubuntu-24.04-arm'
+        required: true       
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: release-env
+
+    steps:
+
+    - name: echo machine
+      run: echo "inputs.machine = ${{ inputs.machine }}"
