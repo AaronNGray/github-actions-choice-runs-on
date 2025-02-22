@@ -1,0 +1,21 @@
+name: Choose Machine
+
+on:
+  workflow_dispatch:
+    inputs:
+      machine:
+        type: choice
+        description: Choose Machine
+        options: 
+        - ubuntu-24.04-arm
+        - self-hosted, ubuntu-22.04, ARM64
+      environment:
+        type: environment
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.machine }}"
